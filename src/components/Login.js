@@ -11,7 +11,7 @@ import { CircularProgress } from '@mui/material';
 const Login = () => {
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
-    const [showPassword, setShowPassword] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);import { Visibility, VisibilityOff } from "@mui/icons-material";
     const [loading, setLoading] = useState(false);
     const nav = useNavigate();
   
@@ -36,10 +36,12 @@ const Login = () => {
   {headers}
   )
   .then(res => {
-    toast.success("Login successful");
+    toast.success("Login successful", {
+      autoClose: 2000,
+    });
+    nav("/chats");
     console.log(res.data)
     localStorage.setItem('userInfo', JSON.stringify(res.data));
-    nav("/");
     setLoading(false);
   })
   .catch(err => {
