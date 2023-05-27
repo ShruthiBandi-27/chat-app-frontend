@@ -1,13 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@300&display=swap');
 
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 .App {
-    min-height: 100vh;
-    display: flex;
-    /* background-image: url('');
+    min-height: 88vh;
+    /* display: flex;
+    width: 50%;
+    background-image: url('');
     background-size: cover;
-    background-position: center;
- */
+    background-position: center; 
     background-color: rgb(144, 144, 204);
+    */
+    background-color: white;
     color: black;
 }
 
@@ -17,7 +25,7 @@
     justify-content: center;
     align-items: center; 
     text-align: center;
-    height: 100vh;
+    height: "100%";
     margin: 5em;
 }
 
@@ -33,9 +41,35 @@
     /* font-family: "Work sans"; */
 }
 
+.chats {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 90vh;
+    padding: 10px;
+}
+
 
 
 .form {
     width: 100%;
     margin: 20px;
 }
+
+.full-width-drawer {
+    width: 500px;
+    background-color: yellow;
+  }
+
+  ::-webkit-scrollbar {
+    width: 0px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: rgba(136, 136, 136, 0.281);
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }

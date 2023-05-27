@@ -85,7 +85,9 @@ const Signup = () => {
   {headers}
   )
   .then(res => {
-    toast.success("Singup successful");
+    toast.success("Singup successful, Please login!",{
+      autoClose: 2000,
+    });
     console.log(res.data)
     localStorage.setItem('userInfo', JSON.stringify(res.data));
     nav("/");

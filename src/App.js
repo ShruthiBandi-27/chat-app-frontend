@@ -3,17 +3,21 @@ import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./components/Home";
 import Chat from "./components/Chat";
+import ChatProvider from "./Context/ChatProvider";
 
 function App() {
   return (
-    <BrowserRouter>
-    <div className="App">
-      <Routes>
-        <Route path="/" element={<Home/>}/>
-        <Route path="/chats" element={<Chat/>}/>
-      </Routes>
-    </div>
-    </BrowserRouter>
+      <BrowserRouter>
+      <ChatProvider>
+        <div className="App">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/chats" element={<Chat />} />
+          </Routes>
+        </div>
+        </ChatProvider>
+      </BrowserRouter>
+    
   );
 }
 
