@@ -28,7 +28,7 @@ const style = {
   alignItems: "center",
 };
 
-const UpdateGroupChatModel = ({ fetchAgain, setFetchAgain }) => {
+const UpdateGroupChatModel = ({ fetchAgain, setFetchAgain, fetchMessages }) => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -63,6 +63,7 @@ const UpdateGroupChatModel = ({ fetchAgain, setFetchAgain }) => {
           .then((res) => {
             user1._id === user._id ? setSelectedChat(): setSelectedChat(res.data);
             setFetchAgain(!fetchAgain);
+            fetchMessages()
             setLoading(false);
           })
     }
