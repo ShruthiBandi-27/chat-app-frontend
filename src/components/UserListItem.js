@@ -18,7 +18,7 @@ const UserListItem = ({handleFunction, user}) => {
         margin: "5px",
         "&:hover": {
             color: "white !important",
-            backgroundColor: "#38B2AC !important",
+            backgroundColor: "#42C152 !important",
         },
         borderRadius: "5px"
     }}

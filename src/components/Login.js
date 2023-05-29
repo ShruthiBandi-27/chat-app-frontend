@@ -9,10 +9,11 @@ import { useNavigate } from "react-router-dom";
 import { CircularProgress } from '@mui/material';
 
 const Login = () => {
-    const [email, setEmail] = useState();
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState();
     const [showPassword, setShowPassword] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [displayGuest, setDisplayGuest] = useState(false);
     const nav = useNavigate();
   
     
@@ -98,17 +99,37 @@ const Login = () => {
              >
               {loading ? <CircularProgress size={24} /> : 'Login'}
             </Button>
-            <Button
+            
+            <div>
+              {
+                displayGuest && (
+                  <Button
             variant="contained"
              color="error" 
              onClick={ () => {
                 setEmail("guest@example.com");
                 setPassword("1234");
+
              }}
              sx={{width: "100%"}}
              >
               Get guest User Credentials
             </Button>
+                )
+              }
+            </div>
+            {/* <Button
+            variant="contained"
+             color="error" 
+             onClick={ () => {
+                setEmail("guest@example.com");
+                setPassword("1234");
+
+             }}
+             sx={{width: "100%"}}
+             >
+              Get guest User Credentials
+            </Button> */}
           </form>
         </div>
       );

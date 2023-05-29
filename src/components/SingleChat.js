@@ -5,9 +5,7 @@ import {
   CircularProgress,
   FilledInput,
   FormControl,
-  Input,
   InputLabel,
-  TextField,
 } from "@mui/material";
 import { getSender, getSenderFull } from "../config/ChatLogics";
 import ProfileModal from "./ProfileModal";
@@ -30,7 +28,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   const [typing, setTyping] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
 
-  const { user, selectedChat, setSelectedChat } = ChatState();
+  const { user, selectedChat, setSelectedChat, notification, setNotification } = ChatState();
 
   const fetchMessages = async () => {
     if(!selectedChat) return;
@@ -44,7 +42,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
           };
           await axios.get(`${API}/api/message/fetchMessages/${selectedChat._id}`, config)
                 .then((res) => {
-                    console.log(`fetched messages: ${JSON.stringify(res.data)}`)
+                   // console.log(`fetched messages: ${JSON.stringify(res.data)}`)
                     setMessages(res.data);
                     setLoading(false);
                     socket.emit("join chat",selectedChat._id);
@@ -72,10 +70,16 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
     selectedChatCompare = selectedChat;
   }, [selectedChat])
 
+  console.log(notification, "--------------");
+
   useEffect(() => {
     socket.on("message received", (newMessageReceived) => {
       if(!selectedChatCompare || selectedChatCompare._id !== newMessageReceived.chat._id){
-        //send notification
+        //show notification
+        if(!notification.includes(newMessageReceived)) {
+          setNotification([newMessageReceived, ...notification]);
+          setFetchAgain(!fetchAgain);
+        }
       }
       else {
         setMessages([...messages, newMessageReceived]);
@@ -99,7 +103,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
             chatId: selectedChat._id
         }, config)
         .then((res) => {
-            console.log(`entered mesg: ${JSON.stringify(res.data)}`)
+            //console.log(`entered mesg: ${JSON.stringify(res.data)}`)
             socket.emit("new message", res.data)
             setMessages([...messages, res.data])
         })
@@ -223,10 +227,9 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
             alignItems: "center",
             justifyContent: "center",
             height: "100%",
-            width: "95%",
+            width: "100%",
             backgroundColor: "#E8E8E8",
             color: "black",
-            margin: "5px 0",
             borderRadius: "10px",
           }}
         >

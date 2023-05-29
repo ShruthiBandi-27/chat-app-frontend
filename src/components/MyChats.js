@@ -105,8 +105,8 @@ const MyChats = ({fetchAgain, setFetchAgain}) => {
                 sx={{
                   cursor: "pointer",
                   padding: "3px",
-                  backgroundColor:  selectedChat === chat ? "#42C152" : "#E8E8E8",
-                  color: selectedChat === chat? "white" : "black" ,
+                  backgroundColor:  selectedChat && selectedChat === chat ? "#42C152" : "#E8E8E8",
+                  color: selectedChat && selectedChat === chat? "white" : "black" ,
                   borderRadius: "5px",
                   margin: "5px",
                 }}

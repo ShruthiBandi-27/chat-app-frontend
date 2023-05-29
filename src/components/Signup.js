@@ -1,13 +1,25 @@
-import { LocalDiningRounded, Visibility, VisibilityOff } from "@mui/icons-material";
-import { Button, FormControl, FormGroup, IconButton, Input, InputAdornment, InputLabel, TextField } from "@mui/material";
+import {
+  LocalDiningRounded,
+  Visibility,
+  VisibilityOff,
+} from "@mui/icons-material";
+import {
+  Button,
+  FormControl,
+  FormGroup,
+  IconButton,
+  Input,
+  InputAdornment,
+  InputLabel,
+  TextField,
+} from "@mui/material";
 import React, { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { CircularProgress } from '@mui/material';
-import axios from 'axios';
-import {API} from '../global.js';
+import { CircularProgress } from "@mui/material";
+import axios from "axios";
+import { API } from "../global.js";
 import { useNavigate } from "react-router-dom";
-
 
 const Signup = () => {
   const [name, setName] = useState();
@@ -17,9 +29,9 @@ const Signup = () => {
   const [profile, setProfile] = useState();
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [profileVisible, setProfileVisible] = useState(false);
   const nav = useNavigate();
-  
-  
+
   const changeVisiblity = () => {
     setShowPassword(!showPassword);
   };
@@ -52,57 +64,61 @@ const Signup = () => {
     //     setLoading(false);
     //   })
     // }
-
     // else {
     //   toast.error("Please select an Image of type jpg/png");
     //   setLoading(false);
     //   return;
     // }
-
-  }
+  };
 
   const handleSubmit = async (event) => {
     //event.preventDefault();
     // Perform form submission logic
     console.log("Submitted:", name, email);
     setLoading(true);
-    if(!name || !email || !password || !confirmPassword){
+    if (!name || !email || !password || !confirmPassword) {
       toast.error("Please fill all the fields");
       setLoading(false);
       return;
     }
-    if(password !== confirmPassword){
+    if (password !== confirmPassword) {
       toast.error("Passwords doesn't match");
       setLoading(false);
       return;
     }
 
-  const headers = {
-    'Content-Type': 'application/json',
-  }
-  await axios.post(`${API}/api/user/signup`,
-  {name, email, password, profile},
-  {headers}
-  )
-  .then(res => {
-    toast.success("Singup successful, Please login!",{
-      autoClose: 2000,
-    });
-    console.log(res.data)
-    localStorage.setItem('userInfo', JSON.stringify(res.data));
-    nav("/");
-    setLoading(false);
-  })
-  .catch(err => {
-    console.log(err);
-    toast.error(`Error: ${err}`);
-    setLoading(false);
-  })
-  
+    const headers = {
+      "Content-Type": "application/json",
+    };
+    await axios
+      .post(
+        `${API}/api/user/signup`,
+        { name, email, password, profile },
+        { headers }
+      )
+      .then((res) => {
+        toast.success("Singup successful, Please login!", {
+          autoClose: 2000,
+        });
+        console.log(res.data);
+        localStorage.setItem("userInfo", JSON.stringify(res.data));
+        nav("/");
+        setLoading(false);
+        setName("");
+        setEmail("");
+        setPassword("");
+        setConfirmPassword("");
+        setProfile("");
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error(`Error: ${err}`);
+        setLoading(false);
+      });
   };
   return (
     <div className="form">
-    <ToastContainer />
+      <ToastContainer />
       <form onSubmit={handleSubmit}>
         <FormGroup>
           <FormControl sx={{ mb: 2 }}>
@@ -146,7 +162,7 @@ const Signup = () => {
               }}
             />
           </FormControl>
-          <FormControl>
+          <FormControl sx={{ mb: 2 }}>
             <TextField
               id="confirmPassword"
               label="Confirm Password"
@@ -166,30 +182,37 @@ const Signup = () => {
               }}
             />
           </FormControl>
-          <FormControl>
-          <InputLabel htmlFor="profile">Profile</InputLabel>
-          </FormControl>
-          <FormControl sx={{ mt: 6,mb:2 }}>
-          {/* <InputLabel htmlFor="profile">Profile</InputLabel> */}
-            <TextField
-              id="profile"
-              type="file"
-              value={profile}
-              onChange={(e) => displayProfiles(e.target.files[0])}
-              inputProps={{accept: 'image/*'}}
-              fullWidth
-            />
-          </FormControl>
+          <div>
+            {profileVisible && (
+              <>
+                <FormControl>
+                  <InputLabel htmlFor="profile">Profile</InputLabel>
+                </FormControl>
+                <FormControl sx={{ mt: 6, mb: 2 }}>
+                  {/* <InputLabel htmlFor="profile">Profile</InputLabel> */}
+                  <TextField
+                    id="profile"
+                    type="file"
+                    value={profile}
+                    onChange={(e) => displayProfiles(e.target.files[0])}
+                    inputProps={{ accept: "image/*" }}
+                    fullWidth
+                    sx={{ display: "none" }}
+                  />
+                </FormControl>
+              </>
+            )}
+          </div>
         </FormGroup>
         <Button
-        type="submit" 
-        variant="contained"
-         color="primary" 
-         onClick={handleSubmit}
-         sx={{width: "100%"}}
-         disabled={loading}
-         >
-          {loading ? <CircularProgress size={24} /> : 'Sing up'}
+          type="submit"
+          variant="contained"
+          color="primary"
+          onClick={handleSubmit}
+          sx={{ width: "100%" }}
+          disabled={loading}
+        >
+          {loading ? <CircularProgress size={24} /> : "Sign up"}
         </Button>
       </form>
     </div>

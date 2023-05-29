@@ -24,7 +24,7 @@ const Home = () => {
 
   return (
     <Container maxWidth="sm" className="container">
-      <Card className="card">{<p>Let's Chat</p>}</Card>
+      <Card className="card">{<h1>Let's Chat</h1>}</Card>
       <Card className="card">
         <div>
           <Tabs value={value} onChange={handleChange}>
