@@ -17,7 +17,8 @@ import './styles.css'
 import ScrollableChat from "./ScrollableChat";
 import { io } from 'socket.io-client';
 
-const ENDPOINT = "http://localhost:8000";
+const ENDPOINT = "https://chat-app-48we.onrender.com/";
+// const ENDPOINT = "http://localhost:8000";
 var socket, selectedChatCompare;
 
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {
