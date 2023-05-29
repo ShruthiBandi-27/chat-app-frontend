@@ -163,7 +163,7 @@ const SideDrawer = () => {
           Search User
         </Button>
 
-        <p>Let's Chat</p>
+        <h2>Let's Chat</h2>
         <MenuList sx={{ display: "flex" }}>
           <Tooltip title="notifications">
             <MenuItem onClick={handleNotificationClick}>
@@ -174,29 +174,6 @@ const SideDrawer = () => {
                   color="error"
                 />
               </Box>
-              {/* <Menu
-        anchorEl={showNotifications}
-        open={Boolean(showNotifications)}
-        onClose={() => setShowNotifications(false)}
-      >
-        {!notification.length ? (
-          <MenuItem>No new notifications</MenuItem>
-        ) : (
-          notification.map((notify) => (
-            <MenuItem
-              key={notify._id}
-              onClick={() => {
-                setSelectedChat(notify.chat);
-                setNotification(notification.filter((n) => n !== notify));
-              }}
-            >
-              {notify.chat.isGroupChat
-                ? `Message from ${notify.chat.chatName}`
-                : `Message from ${getSender(user, notify.chat.users)}`}
-            </MenuItem>
-          ))
-        )}
-      </Menu> */}
             </MenuItem>
           </Tooltip>
 
